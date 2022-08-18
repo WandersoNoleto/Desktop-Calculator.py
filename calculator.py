@@ -19,7 +19,7 @@ class Calculator(QMainWindow):
         )
 
         self.display.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
-
+        
         self.add_btn(QPushButton('7'), 1, 0, 1, 1)
         self.add_btn(QPushButton('8'), 1, 1, 1, 1)
         self.add_btn(QPushButton('9'), 1, 2, 1, 1)
