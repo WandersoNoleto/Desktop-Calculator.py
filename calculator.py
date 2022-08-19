@@ -4,10 +4,10 @@ from PyQt5.QtWidgets import QPushButton, QLineEdit, QSizePolicy
 
 
 def fmt_display(str):
-    new_strI = str.replace('÷', '/')
-    new_strII = new_strI.replace('x', '*')
+    new_str        = str.replace('÷', '/')
+    final_str = new_str.replace('x', '*')
 
-    return new_strII
+    return final_str
 
 
 class Calculator(QMainWindow):
@@ -44,7 +44,7 @@ class Calculator(QMainWindow):
         self.add_btn(QPushButton('.'), 4, 2, 1, 1)
         self.add_btn(QPushButton('+'), 4, 3, 1, 1)
         
-        self.add_btn(
+        self.add_btn( 
             QPushButton('C'), 1, 4, 1, 1, 
                 lambda: self.display.setText(''),
                 'background: #0000ff; color: white')
