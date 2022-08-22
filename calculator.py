@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QPushButton, QLineEdit, QSizePolicy
 
 def fmt_display(str):
     new_str        = str.replace('÷', '/')
-    final_str = new_str.replace('x', '*')
+    final_str      = new_str.replace('x', '*')
 
     return final_str
 
@@ -35,7 +35,7 @@ class Calculator(QMainWindow):
         self.add_btn(QPushButton('4'), 2, 0, 1, 1)
         self.add_btn(QPushButton('5'), 2, 1, 1, 1)
         self.add_btn(QPushButton('6'), 2, 2, 1, 1)
-        self.add_btn(QPushButton('*'), 2, 3, 1, 1)
+        self.add_btn(QPushButton('x'), 2, 3, 1, 1)
         self.add_btn(QPushButton('1'), 3, 0, 1, 1)
         self.add_btn(QPushButton('2'), 3, 1, 1, 1)
         self.add_btn(QPushButton('3'), 3, 2, 1, 1)
@@ -87,7 +87,7 @@ class Calculator(QMainWindow):
 
 
 if __name__ == '__main__':
-    qt = QApplication(sys.argv)
     calc = Calculator()
+    qt   = QApplication(sys.argv)
     calc.show()
     qt.exec()
