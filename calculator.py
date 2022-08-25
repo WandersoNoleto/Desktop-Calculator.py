@@ -4,10 +4,12 @@ from PyQt5.QtWidgets import QPushButton, QLineEdit, QSizePolicy
 
 
 def fmt_display(str):
-    new_str        = str.replace('÷', '/')
-    final_str      = new_str.replace('x', '*')
+    str  = str.replace('÷', '/')
+    str  = str.replace('x', '*')
+    str  = str.replace('mod', '%')
+    str  = str.replace('^', '**')
 
-    return final_str
+    return str
 
 
 class Calculator(QMainWindow):
@@ -28,21 +30,26 @@ class Calculator(QMainWindow):
 
         self.display.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
         
-        self.add_btn(QPushButton('7'), 1, 0, 1, 1)
-        self.add_btn(QPushButton('8'), 1, 1, 1, 1)
-        self.add_btn(QPushButton('9'), 1, 2, 1, 1)
-        self.add_btn(QPushButton('÷'), 1, 3, 1, 1)
-        self.add_btn(QPushButton('4'), 2, 0, 1, 1)
-        self.add_btn(QPushButton('5'), 2, 1, 1, 1)
-        self.add_btn(QPushButton('6'), 2, 2, 1, 1)
-        self.add_btn(QPushButton('x'), 2, 3, 1, 1)
-        self.add_btn(QPushButton('1'), 3, 0, 1, 1)
-        self.add_btn(QPushButton('2'), 3, 1, 1, 1)
-        self.add_btn(QPushButton('3'), 3, 2, 1, 1)
-        self.add_btn(QPushButton('-'), 3, 3, 1, 1)
-        self.add_btn(QPushButton('0'), 4, 0, 1, 2)
-        self.add_btn(QPushButton('.'), 4, 2, 1, 1)
-        self.add_btn(QPushButton('+'), 4, 3, 1, 1)
+        self.add_btn(QPushButton('mod'), 1, 0, 1, 1)
+        self.add_btn(QPushButton('%'), 1, 1, 1, 1)
+        self.add_btn(QPushButton('√'), 1, 2, 1, 1)
+        self.add_btn(QPushButton('^'), 1, 3, 1, 1)
+
+        self.add_btn(QPushButton('7'), 2, 0, 1, 1)
+        self.add_btn(QPushButton('8'), 2, 1, 1, 1)
+        self.add_btn(QPushButton('9'), 2, 2, 1, 1)
+        self.add_btn(QPushButton('÷'), 2, 3, 1, 1)
+        self.add_btn(QPushButton('4'), 3, 0, 1, 1)
+        self.add_btn(QPushButton('5'), 3, 1, 1, 1)
+        self.add_btn(QPushButton('6'), 3, 2, 1, 1)
+        self.add_btn(QPushButton('x'), 3, 3, 1, 1)
+        self.add_btn(QPushButton('1'), 4, 0, 1, 1)
+        self.add_btn(QPushButton('2'), 4, 1, 1, 1)
+        self.add_btn(QPushButton('3'), 4, 2, 1, 1)
+        self.add_btn(QPushButton('-'), 4, 3, 1, 1)
+        self.add_btn(QPushButton('0'), 5, 0, 1, 2)
+        self.add_btn(QPushButton('.'), 5, 2, 1, 1)
+        self.add_btn(QPushButton('+'), 5, 3, 1, 1)
         
         self.add_btn( 
             QPushButton('C'), 1, 4, 1, 1, 
@@ -55,7 +62,7 @@ class Calculator(QMainWindow):
                 ),
                 'background: #791515; color: white')
         self.add_btn(
-            QPushButton('='), 3, 4, 2, 1, self.equal_method,
+            QPushButton('='), 3, 4, 3, 1, self.equal_method,
                 'background: #135e0d; color: white')
 
         self.setCentralWidget(self.cw)
@@ -87,7 +94,7 @@ class Calculator(QMainWindow):
 
 
 if __name__ == '__main__':
-    calc = Calculator()
     qt   = QApplication(sys.argv)
+    calc = Calculator()
     calc.show()
     qt.exec()
