@@ -1,9 +1,7 @@
-from ctypes.wintypes import FLOAT
 import imp
 from itertools import takewhile, dropwhile
 from math import sqrt
 import sys
-from types import new_class
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout
 from PyQt5.QtWidgets import QPushButton, QLineEdit, QSizePolicy
 
