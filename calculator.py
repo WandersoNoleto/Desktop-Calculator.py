@@ -1,8 +1,22 @@
+from ctypes.wintypes import FLOAT
+import imp
+from itertools import takewhile, dropwhile
+from math import sqrt
 import sys
+from types import new_class
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout
 from PyQt5.QtWidgets import QPushButton, QLineEdit, QSizePolicy
 
 
+def percent_method(str):
+    new_str   = list(str)
+    percent   = ''.join(list(takewhile(lambda x: x != 'x', reversed(new_str)))) 
+    f_percent = ''.join(list(reversed(percent)))
+    value     = ''.join(list(dropwhile(lambda x: x != 'x', reversed(new_str))))
+    f_value   = ''.join(list(reversed(value)))[:-1]
+    
+    return int(eval(f_value))*int(f_percent)/100
+        
 def fmt_display(str):
     str  = str.replace('÷', '/')
     str  = str.replace('x', '*')
@@ -30,9 +44,14 @@ class Calculator(QMainWindow):
 
         self.display.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
         
-        self.add_btn(QPushButton('mod'), 1, 0, 1, 1)
-        self.add_btn(QPushButton('%'), 1, 1, 1, 1)
-        self.add_btn(QPushButton('√'), 1, 2, 1, 1)
+        self.add_btn(
+            QPushButton('<-'), 1, 0, 1, 1,
+                lambda: self.display.setText(
+                    self.display.text()[:-1]
+                ),
+                'background: #791515; color: white')
+        self.add_btn(QPushButton('('), 1, 1, 1, 1)
+        self.add_btn(QPushButton(')'), 1, 2, 1, 1)
         self.add_btn(QPushButton('^'), 1, 3, 1, 1)
 
         self.add_btn(QPushButton('7'), 2, 0, 1, 1)
@@ -55,15 +74,19 @@ class Calculator(QMainWindow):
             QPushButton('C'), 1, 4, 1, 1, 
                 lambda: self.display.setText(''),
                 'background: #0000ff; color: white')
+
+        self.add_btn(QPushButton('mod'), 2, 4, 1, 1,'','font-size: 16px')
         self.add_btn(
-            QPushButton('<-'), 2, 4, 1, 1,
-                lambda: self.display.setText(
-                    self.display.text()[:-1]
-                ),
-                'background: #791515; color: white')
-        self.add_btn(
-            QPushButton('='), 3, 4, 3, 1, self.equal_method,
+            QPushButton('='), 5, 4, 1, 1, self.equal_method,
                 'background: #135e0d; color: white')
+        self.add_btn(QPushButton('√'), 3, 4, 1, 1, 
+            lambda: self.display.setText(
+                str(sqrt(int(self.display.text())))
+                ))
+        self.add_btn(QPushButton('%'), 4, 4, 1, 1, 
+            lambda: self.display.setText(
+                str(percent_method(self.display.text()))
+            ))
 
         self.setCentralWidget(self.cw)
 
@@ -90,6 +113,9 @@ class Calculator(QMainWindow):
             )
         except Exception as error:
             self.display.setText('ERROR')
+    
+
+
 
 
 
@@ -98,3 +124,4 @@ if __name__ == '__main__':
     calc = Calculator()
     calc.show()
     qt.exec()
+
