@@ -6,14 +6,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout
 from PyQt5.QtWidgets import QPushButton, QLineEdit, QSizePolicy
 
 
-def percent_method(str):
-    new_str   = list(str)
-    percent   = ''.join(list(takewhile(lambda x: x != 'x', reversed(new_str)))) 
-    f_percent = ''.join(list(reversed(percent)))
-    value     = ''.join(list(dropwhile(lambda x: x != 'x', reversed(new_str))))
-    f_value   = ''.join(list(reversed(value)))[:-1]
-    
-    return int(eval(f_value))*int(f_percent)/100
+
         
 def fmt_display(str):
     str  = str.replace('÷', '/')
@@ -83,7 +76,7 @@ class Calculator(QMainWindow):
                 ))
         self.add_btn(QPushButton('%'), 4, 4, 1, 1, 
             lambda: self.display.setText(
-                str(percent_method(self.display.text()))
+                str(self.percent_method())
             ))
 
         self.setCentralWidget(self.cw)
@@ -111,7 +104,20 @@ class Calculator(QMainWindow):
             )
         except Exception as error:
             self.display.setText('ERROR')
-    
+
+    def percent_method(self):
+        new_str   = list(self.display.text())
+        percent   = ''.join(list(takewhile(lambda x: x != 'x', reversed(new_str)))) 
+        f_percent = ''.join(list(reversed(percent)))
+        value     = ''.join(list(dropwhile(lambda x: x != 'x', reversed(new_str))))
+        f_value   = ''.join(list(reversed(value)))[:-1]
+        
+        try:
+            self.display.setText(str(int(eval(f_value))*int(f_percent)/100))
+
+        except Exception as error:
+            self.display.setText('ERROR')
+
 
 
 
