@@ -1,5 +1,5 @@
 
-# Desktop-Calculator.py
+# Desktop-PyCalculator
 <div align='center'><img src='documentation/mainpicture.png'/><div/>
 
 <div align='left'>
